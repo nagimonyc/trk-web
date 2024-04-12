@@ -1,10 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import Header from '../partials/Header';
-import Banner from '../partials/Banner';
 
 function SignUp() {
+
+  // Initialize Stripe.js
+  const stripe = Stripe('pk_live_51OaSWnEQO3gNE6xrKK1pHZXzWux71xpxXpA3nQNtNK30Vz43sCQeJzO7QuMk708tOGvGstsLbBS1jtMCIWZ14UCR00j1Bt80cF');
+  
+  useEffect(() => {
+    // Only initialize Stripe and Checkout once when the component mounts
+    initialize();
+  }, []);
+  
+  // Fetch Checkout Session and retrieve the client secret
+  async function initialize() {
+    const fetchClientSecret = async () => {
+      const response = await fetch("https://us-central1-trk-app-505a1.cloudfunctions.net/createCheckoutSession", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          // Example amount and currency - adjust according to your needs
+          amount: 299, // $2.99 (IN CENTS)
+          currency: 'usd',
+          //No email (FOR NOW)
+        }),
+      });
+      const { clientSecret } = await response.json();
+      console.log('Client Secret is: ', clientSecret);
+      return clientSecret;
+    };
+
+    // Initialize Checkout
+    const checkout = await stripe.initEmbeddedCheckout({
+      fetchClientSecret,
+    });
+
+    // Mount Checkout
+    checkout.mount('#checkout');
+  }
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
@@ -24,35 +60,9 @@ function SignUp() {
               </div>
 
               {/* Form */}
-              <div className="max-w-sm mx-auto">
-                <form>
-                  <div className="flex flex-wrap -mx-3 mb-4">
-                    <div className="w-full px-3">
-                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">Name <span className="text-red-600">*</span></label>
-                      <input id="name" type="text" className="form-input w-full text-gray-800" placeholder="Enter your name" required />
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap -mx-3 mb-4">
-                    <div className="w-full px-3">
-                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
-                      <input id="email" type="email" className="form-input w-full text-gray-800" placeholder="Enter your email address" required />
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap -mx-3 mb-4">
-                    <div className="w-full px-3">
-                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
-                      <input id="password" type="password" className="form-input w-full text-gray-800" placeholder="Enter your password" required />
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap -mx-3 mt-6">
-                    <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full">Sign up</button>
-                    </div>
-                  </div>
-                  <div className="text-sm text-gray-500 text-center mt-3">
-                    By creating an account, you agree to the <a className="underline" href="#0">terms & conditions</a>, and our <a className="underline" href="#0">privacy policy</a>.
-                                </div>
-                </form>
+              <div className="max-w-lg mx-auto">
+              <div id="checkout">
+              </div>
               </div>
 
             </div>
@@ -60,8 +70,6 @@ function SignUp() {
         </section>
 
       </main>
-      <Banner />
-
     </div>
   );
 }
