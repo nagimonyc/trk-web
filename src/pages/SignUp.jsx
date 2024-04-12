@@ -60,7 +60,6 @@ function SignUp() {
         </section>
 
       </main>
-
       <Banner />
 
     </div>
