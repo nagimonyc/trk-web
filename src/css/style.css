@@ -16,7 +16,30 @@
     .rtl {
         direction: rtl;
     }
+
+    .mobile {
+        background-image: url('images/IMG_8105.jpeg');
+    }
+
+    .desktop {
+        background-image: url('images/Desktop-Stripe-integration-2.png');
+    }
 }
+
+
+@media (min-width: 769px) {
+    .mobile {
+        background-image: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .desktop {
+        background-image: none;
+    }
+
+}
+
 
 /* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
 [x-cloak=""] {

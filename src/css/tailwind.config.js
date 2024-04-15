@@ -123,6 +123,10 @@ module.exports = {
       zIndex: {
         '-1': '-1',
       },
+      backgroundImage: theme => ({
+        'desktop': "url('../../public/images/Desktop-Stripe-integration-2.png')",
+        'mobile': "url('../../public/images/IMG_8105.jpeg')",
+      }),
     },
   },
   variants: {
