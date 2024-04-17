@@ -1,34 +1,31 @@
 import React from 'react';
+import backgroundImage2 from '../images/IMG_8105.jpeg';
+import backgroundImage1 from '../images/Desktop-Stripe-integration-2.png';
+import { useNavigate } from 'react-router-dom';
 
-import Header from '../partials/Header';
-import HeroHome from '../partials/HeroHome';
-import FeaturesHome from '../partials/Features';
-import FeaturesBlocks from '../partials/FeaturesBlocks';
-import Testimonials from '../partials/Testimonials';
-import Newsletter from '../partials/Newsletter';
-import Footer from '../partials/Footer';
+const Home = () => {
+  const [backgroundImage, setBackgroundImage] = React.useState(window.innerWidth > 768 ? backgroundImage1 : backgroundImage2);
+  const navigate = useNavigate();
 
-function Home() {
+  React.useEffect(() => {
+    const handleResize = () => {
+      setBackgroundImage(window.innerWidth > 768 ? backgroundImage1 : backgroundImage2);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleButtonClick = () => {
+    navigate('/signup'); // Replace '/new-page' with the path to the new page
+  };
+
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
-
-      {/*  Site header */}
-      <Header />
-
-      {/*  Page content */}
-      <main className="flex-grow">
-
-        {/*  Page sections */}
-        <HeroHome />
-        <FeaturesHome />
-        <FeaturesBlocks />
-        <Testimonials />
-        <Newsletter />
-
-      </main>
-      {/*  Site footer */}
-      <Footer />
-
+    <div style={{ backgroundImage: `url(${backgroundImage})`, height: '100vh', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', backgroundRepeat: 'no-repeat', backgroundSize: 'contain', backgroundPosition: 'center', backgroundColor: 'black' }}>
+      <div style={{ position: 'absolute', right: 0, top: 0, width: '50%', height: '100%' }} onClick={handleButtonClick}></div>
     </div>
   );
 }
