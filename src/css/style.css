@@ -26,7 +26,6 @@
     }
 }
 
-
 @media (min-width: 769px) {
     .mobile {
         background-image: none;
@@ -37,11 +36,45 @@
     .desktop {
         background-image: none;
     }
-
 }
 
+/* Ensure body and html take full height */
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
 
 /* See Alpine.js: https://github.com/alpinejs/alpine#x-cloak */
 [x-cloak=""] {
     display: none;
+}
+
+/* Ensure the main container flexes correctly */
+.flex-col.min-h-screen.overflow-hidden {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* This should keep your page size to the viewport height */
+    overflow: hidden;
+    /* Prevent any part of the flex items from causing scrolling */
+}
+
+/* Adjustments for the main content area */
+.flex-grow.flex {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    /* Adding overflow hidden here to prevent any internal content from causing scrolling */
+}
+
+/* Responsive image styling adjustments */
+img {
+    width: 100%;
+    height: auto;
+    /* Adjusted to 'auto' to maintain aspect ratio without explicitly forcing height */
+    object-fit: cover;
+    /* Maintain this to ensure coverage */
+    max-height: 100vh;
+    /* Prevent the image from being taller than the viewport */
 }
