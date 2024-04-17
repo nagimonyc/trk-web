@@ -78,3 +78,106 @@ img {
     max-height: 100vh;
     /* Prevent the image from being taller than the viewport */
 }
+
+.modal-overlay {
+    position: fixed;
+    /* Ensure the overlay is positioned over the whole screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    /* High z-index to make sure the modal is on top of other content */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+}
+
+
+.modal-content {
+    background-color: #2c2c2e;
+    /* Dark background */
+    border-radius: 14px;
+    /* Rounded corners */
+    padding: 20px;
+    color: white;
+    /* White text */
+}
+
+.modal-header {
+    font-size: 24px;
+    /* Large text for the header */
+    font-weight: bold;
+    /* Bold font weight for the header */
+    margin-bottom: 8px;
+    /* Spacing after the header */
+}
+
+.modal-body {
+    font-size: 16px;
+    /* Standard text size for the body */
+}
+
+.modal-footer {
+    margin-top: 20px;
+    /* Spacing before the footer */
+}
+
+.input {
+    background-color: #3a3a3c;
+    /* Slightly lighter background for inputs */
+    border: none;
+    /* No border for inputs */
+    color: white;
+    /* White text for inputs */
+    margin: 8px 0;
+    /* Margin for spacing between inputs */
+    padding: 12px;
+    /* Padding inside inputs */
+    border-radius: 8px;
+    /* Rounded corners for inputs */
+}
+
+.button {
+    background-color: #0a84ff;
+    /* Blue background for buttons */
+    color: white;
+    /* White text for buttons */
+    border: none;
+    /* No border for buttons */
+    padding: 12px;
+    /* Padding inside buttons */
+    margin: 8px 0;
+    /* Margin for spacing between buttons */
+    border-radius: 8px;
+    /* Rounded corners for buttons */
+    font-weight: bold;
+    /* Bold font weight for buttons */
+    text-align: center;
+    /* Center text in buttons */
+    display: block;
+    /* Display block to allow width to be set */
+    width: 100%;
+    /* Full width buttons */
+}
+
+.google-button {
+    background-color: #ffffff;
+    /* White background for Google button */
+    color: #000000;
+    /* Black text for Google button */
+    /* Add other styles like a Google logo and additional padding/margins as needed */
+}
+
+.checkbox-container {
+    display: flex;
+    /* Use flex for alignment */
+    align-items: center;
+    /* Center items vertically */
+    margin: 8px 0;
+    /* Margin for spacing */
+}
+
+.checkbox {
+    margin-right: 8px;
+    /* Spacing after the checkbox */
+}
