@@ -13,11 +13,23 @@ function SignUp() {
 
   const [modalIsOpen, setModalIsOpen] = useState(true); // Initialize the modal state
 
+  // Function to sign in with Google
+  const signInWithGoogle = async () => {
+    try {
+      const result = await auth.signInWithPopup(googleProvider);
+      const user = result.user;
+      console.log('Signed in with Google!', user);
+      closeModal();
+    } catch (error) {
+      console.error('Error signing in with Google:', error);
+      alert(error.message);
+    }
+  };
+
   // Function to open the modal
   const openModal = () => {
     setModalIsOpen(true);
   };
-
   // Function to close the modal
   const closeModal = () => {
     setModalIsOpen(false);
@@ -57,9 +69,9 @@ function SignUp() {
           {/* Using TailwindCSS utilities directly to manage the layout */}
           <img src={backgroundImage2} alt="Background" className="w-full h-full object-cover" />
         </div>
+        {/* STRIPE */}
         <div id="checkout" className="w-full md:w-1/2 p-4 md:p-8 bg-white">
           <StripeCheckout />
-          {/* Stripe Checkout will be mounted here */}
         </div>
       </main>
     </div >
